@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Quiz Daily Activities</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+<style>
+body{
+  font-family:Poppins;
+  background:#050b1e;
+  color:white;
+  text-align:center;
+  padding:20px;
+}
+
+h2{color:#4fc3f7;}
+
+.card{
+  background:rgba(255,255,255,.08);
+  padding:20px;
+  border-radius:14px;
+  margin-top:20px;
+}
+
+.option{
+  background:#0a1a3a;
+  padding:12px;
+  margin:10px auto;
+  border-radius:10px;
+  cursor:pointer;
+  border:1px solid #2196f3;
+  width:260px;       
+  height:50px;       
+  display:flex;
+  align-items:center;
+  justify-content:center; 
+  box-sizing:border-box;
+  font-size:16px;
+  text-align:center;       
+}
+
+.option:hover{background:#2196f3;}
+.option.selected{background:#2196f3;}
+
+button{
+  background:#2196f3;
+  border:none;
+  padding:12px 25px;
+  border-radius:10px;
+  color:white;
+  margin-top:15px;
+  cursor:pointer;
+}
+
+#score{margin-top:20px;font-size:18px;}
+</style>
+</head>
+<body>
+
+<h2>Quiz Daily Activities</h2>
+<div class="card" id="quizBox"></div>
+<button id="nextBtn" onclick="next()">Next</button>
+<p id="score"></p>
+
+<script>
+// Materi 20 aktivitas
+const vocab = [
+ {en:"Wake up", id:"Bangun tidur", sound:"audio/wakeup.mp3"},
+ {en:"Take a bath", id:"Mandi", sound:"audio/bath.mp3"},
+ {en:"Go to school", id:"Pergi ke sekolah", sound:"audio/school.mp3"},
+ {en:"Go home", id:"Pulang ke rumah", sound:"audio/home.mp3"},
+ {en:"Watch TV", id:"Menonton TV", sound:"audio/tv.mp3"},
+ {en:"Read a book", id:"Membaca buku", sound:"audio/read.mp3"},
+ {en:"Wash hands", id:"Mencuci tangan", sound:"audio/washhands.mp3"},
+ {en:"Play", id:"Bermain", sound:"audio/play.mp3"},
+ {en:"Do homework", id:"Mengerjakan PR", sound:"audio/homework.mp3"},
+ {en:"Brush teeth", id:"Menyikat gigi", sound:"audio/brusht.mp3"},
+ {en:"Shower", id:"Mandi", sound:"audio/shower.mp3"},
+ {en:"Eat breakfast", id:"Sarapan", sound:"audio/breakfast.mp3"},
+ {en:"Have breakfast", id:"Sarapan", sound:"audio/havebreakfast.mp3"},
+ {en:"Wash face", id:"Mencuci muka", sound:"audio/washface.mp3"},
+ {en:"Exercise", id:"Berolahraga", sound:"audio/exercise.mp3"},
+ {en:"Read newspaper", id:"Membaca koran", sound:"audio/newspaper.mp3"},
+ {en:"Listen to music", id:"Mendengarkan musik", sound:"audio/music.mp3"},
+ {en:"Clean room", id:"Membersihkan kamar", sound:"audio/cleanroom.mp3"},
+ {en:"Go shopping", id:"Belanja", sound:"audio/shopping.mp3"},
+ {en:"Sleep", id:"Tidur", sound:"audio/sleep.mp3"}
+];
+
+let currentIndex=0, skor=0, selectedAns=null;
+
+function generate(){
+  selectedAns=null;
+  if(currentIndex>=vocab.length){
+    quizBox.innerHTML="<h2>Quiz Selesai!</h2>";
+    document.getElementById("score").textContent="Skor akhir: "+skor+"/"+vocab.length;
+    document.getElementById("nextBtn").style.display="none";
+
+    // tombol Finish
+    const finishBtn=document.createElement("button");
+    finishBtn.textContent="Finish";
+    finishBtn.onclick=()=>{ window.location.href="../choice.html"; }; 
+    finishBtn.style.marginTop="20px";
+    quizBox.appendChild(finishBtn);
+    return;
+  }
+
+  let current=vocab[currentIndex];
+  let type=Math.floor(Math.random()*3); // 0=Listening,1=Translate,2=Reverse
+
+  if(type===0){
+    quizBox.innerHTML=`<h3>Dengarkan lalu pilih arti</h3>
+    <button onclick="playAudio('${current.sound}')">▶ Play</button>
+    ${generateOptions(current,'id')}`;
+  } else if(type===1){
+    quizBox.innerHTML=`<h3>Arti dari: ${current.en}</h3>
+    ${generateOptions(current,'id')}`;
+  } else {
+    quizBox.innerHTML=`<h3>Bahasa Inggris dari: ${current.id}</h3>
+    ${generateOptions(current,'en')}`;
+  }
+}
+
+function generateOptions(current,key){
+  const correct=current[key];
+  let other=vocab.filter(v=>v[key]!==correct).sort(()=>0.5-Math.random()).slice(0,2);
+  const options=[current,...other];
+  return options.map(o=>`<div class="option" onclick="selectAnswer(this,'${o[key]}','${correct}')">${o[key]}</div>`).join('');
+}
+
+function selectAnswer(elem,value,correct){
+  document.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+  elem.classList.add('selected');
+  selectedAns=value;
+  if(value===correct) skor++;
+}
+
+function next(){
+  if(!selectedAns) return alert("Pilih jawaban dulu!");
+  currentIndex++;
+  generate();
+}
+
+function playAudio(file){
+  new Audio(file).play();
+}
+
+// mulai quiz
+const quizBox=document.getElementById('quizBox');
+generate();
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
