@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>BeeeEducation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:Poppins, sans-serif;
+      background:linear-gradient(120deg,#050b1e,#0a1a3a);
+      color:white;
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 40px;
+    }
+
+    .logo{
+      font-size:22px;
+      font-weight:700;
+      color:#4fc3f7;
+    }
+
+    nav a{
+      margin-left:25px;
+      text-decoration:none;
+      color:#bbdefb;
+    }
+
+    nav a:hover{color:#4fc3f7}
+
+    .hero{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:80px 40px;
+      flex-wrap:wrap;
+    }
+
+    .hero-text{
+      max-width:500px;
+    }
+
+    .hero-text h1{
+      font-size:40px;
+      line-height:1.2;
+      color:#4fc3f7;
+    }
+
+    .hero-text p{
+      margin:20px 0;
+      color:#cfd8ff;
+      line-height:1.6;
+    }
+
+    .btn{
+      background:#2196f3;
+      padding:14px 28px;
+      border-radius:10px;
+      color:white;
+      text-decoration:none;
+      font-weight:600;
+      display:inline-block;
+      box-shadow:0 0 20px rgba(33,150,243,.6);
+    }
+
+    .btn:hover{
+      box-shadow:0 0 35px rgba(79,195,247,1);
+    }
+
+    .hero-img{
+      width:380px;
+      filter:drop-shadow(0 0 30px #2196f3);
+    }
+
+    .features{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:25px;
+      padding:40px;
+    }
+
+    .card{
+      background:rgba(255,255,255,0.08);
+      backdrop-filter:blur(10px);
+      border-radius:16px;
+      padding:25px;
+      border:1px solid rgba(79,195,247,0.3);
+      transition:.3s;
+    }
+
+    .card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 0 25px rgba(79,195,247,.5);
+    }
+
+    .card h3{
+      color:#4fc3f7;
+      margin-bottom:10px;
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">BeeeEducation</div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Vocabulary</a>
+    <a href="#">Quiz</a>
+    <a href="#">Login</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>Belajar Lebih Pintar dengan BeeeEducation</h1>
+    <p>
+      Platform pembelajaran digital dengan materi interaktif,
+      latihan soal, dan sistem pembelajaran modern.
+    </p>
+    <a href="choice.html" class="btn">Mulai Belajar</a>
+  </div>
+
+  <img class="hero-img" src="https://i.ibb.co/7WJj7pL/ai-laptop.png">
+</section>
+
+<section class="features">
+  <div class="card">
+    <h3>Interactive Vocabulary</h3>
+    <p>Belajar kosakata dengan metode game.</p>
+  </div>
+  <div class="card">
+    <h3>Quiz</h3>
+    <p>Latihan soal.</p>
+  </div>
+  <div class="card">
+    <h3>Progress Tracking</h3>
+    <p>Lihat perkembangan belajarmu.</p>
+  </div>
+</section>
+
+</body>
+</html>
+
+
